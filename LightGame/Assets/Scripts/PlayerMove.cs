@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-
+    Vector3 pos;
     public float speed = 5f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        pos = transform.position;   
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.Translate(new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime,Input.GetAxis("Vertical")*speed*Time.deltaTime,0).normalized);
+        Debug.Log((pos - transform.position).sqrMagnitude*100000);
+        Vector3 MoveVec = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+
+        MoveVec*=speed*Time.deltaTime;
+
+       
+        if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") != 0)
+        {
+
+ 
+            MoveVec /= Mathf.Sqrt(2);
+        }
+        transform.Translate(MoveVec);
+        pos = transform.position;
     }
 }
