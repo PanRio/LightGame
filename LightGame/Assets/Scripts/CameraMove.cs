@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class CameraMove : MonoBehaviour
 {
     public Transform toFollow;
     public Vector3 offset = new Vector3(0,0,0);
