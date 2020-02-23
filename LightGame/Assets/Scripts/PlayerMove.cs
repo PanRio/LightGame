@@ -8,13 +8,13 @@ public class PlayerMove : MonoBehaviour
     public float speed = 5f;
     
     Rigidbody2D rb;
-    public HardLight2D HL2D;
+
     // Start is called before the first frame update
     void Start()
     {
        
         rb = GetComponent<Rigidbody2D>();
-        HL2D = GetComponentInChildren<HardLight2D>();
+       
         
 
     }
