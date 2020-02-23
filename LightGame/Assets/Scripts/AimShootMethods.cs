@@ -5,7 +5,7 @@ using UnityEngine;
 public class AimShootMethods : MonoBehaviour
 {
     
-    public HardLight2D HL2D;
+    
     public float offset;
     private Rigidbody2D parentR;
     float angle;
@@ -16,7 +16,7 @@ public class AimShootMethods : MonoBehaviour
     public GameObject BulletLight;
     public GameObject BulletDark;
 
-    public UnityEngine.Experimental.Rendering.LWRP.Light2D light2D;
+    public UnityEngine.Experimental.Rendering.Universal.Light2D light2D;
 
     float R2, L2;
     bool R2Clicked = false, L2Clicked = false;
@@ -47,12 +47,12 @@ public class AimShootMethods : MonoBehaviour
     {
         R2 = Input.GetAxisRaw("R2");
         L2 = Input.GetAxisRaw("L2");
-        if(!R2Clicked && R2>=0.5f)
+        if((!R2Clicked && R2>=0.5f) || Input.GetKeyDown(KeyCode.Z))
         {
             R2Clicked = true;
             FireLight();
         }
-        if (!L2Clicked && L2 >= 0.5f)
+        if ((!L2Clicked && L2 >= 0.5f) || Input.GetKeyDown(KeyCode.X))
         {
             L2Clicked = true;
             FireDark();
@@ -81,7 +81,7 @@ public class AimShootMethods : MonoBehaviour
 
     void FireLight()
     {
-        if (HL2D.Range <= 1)
+        if (light2D.pointLightOuterRadius <= 1)
         {
             Debug.Log("CANT FIRE LIGHT!");
         }
@@ -92,7 +92,7 @@ public class AimShootMethods : MonoBehaviour
 
             bullet.GetComponent<Rigidbody2D>().AddForce(DegreeToVector2(angle+90).normalized * shootForce, ForceMode2D.Impulse);
 
-            HL2D.Range--;
+           
             light2D.pointLightInnerRadius-= 0.5f;
             light2D.pointLightOuterRadius--;
         }
@@ -100,7 +100,7 @@ public class AimShootMethods : MonoBehaviour
     
     void FireDark()
     {
-        if (HL2D.Range >= 5)
+        if (light2D.pointLightOuterRadius >= 5)
         {
             Debug.Log("CANT FIRE DARK!");
         }
@@ -115,7 +115,7 @@ public class AimShootMethods : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().AddForce( DegreeToVector2(angle+90).normalized * shootForce, ForceMode2D.Impulse);
             
 
-            HL2D.Range++;
+            
             light2D.pointLightInnerRadius+= 0.5f;
             light2D.pointLightOuterRadius++;
         }

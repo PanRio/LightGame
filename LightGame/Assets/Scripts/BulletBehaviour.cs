@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class BulletBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -48,6 +50,7 @@ public class BulletBehaviour : MonoBehaviour
     void WallHit()
     {
         Debug.Log("Wall HIT!");
+        //Destroy(gameObject);
     }
 
     void AbsorbWallHit()
